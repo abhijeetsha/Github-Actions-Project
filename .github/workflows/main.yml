@@ -1,0 +1,20 @@
+name: POrtfolio Deployment
+
+ on: 
+   push:
+     branhes:
+     - main
+
+jobs:
+  build-and-deploy:
+  run-on: ubuntu-latest
+  steps: 
+  - name: Checkout
+   uses: aws-action/configure-aws-credentials@v1
+   with:
+     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+     aws-secret-access-key: ${{ secrete.AWS_SECRETE_ACCESS_KEY }}
+     aws-region: us-east-1
+
+- name: Deploy static site to s3 bucket
+  run: aws s3 sync . s3://tw-portful --delete 
